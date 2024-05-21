@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "react-native-test2",
-    "slug": "react-native-test2",
+    "name": "stock-video-share",
+    "scheme": "stock-video-share",
+    "slug": "stock-video-share",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,6 +23,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
