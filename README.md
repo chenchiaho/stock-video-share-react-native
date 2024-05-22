@@ -11,9 +11,14 @@
 
 ## Description
 
-Video Sharing App!
+This is a Video Sharing App built with React Native. It features sign up, login functions and allows user to upload videos. 
 
-
+## Screenshots
+<div>
+<img src="aura1.png" alt="Currency image" width="250"/>
+<img src="aura2.png" alt="Currency image" width="250"/>
+</div>
+ 
 ## Tech Stack
 
 - React Native
