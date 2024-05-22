@@ -32,5 +32,15 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('postcss-import'),
+    require('postcss-nested'),
+    // other plugins
+    (css) => {
+      return new Promise((resolve) => {
+        // async processing
+        resolve(css);
+      });
+    }
+  ]
 };
