@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar'
-import { ScrollView, Text, View, Image } from 'react-native'
 import { Redirect, router } from 'expo-router'
+import { ScrollView, Text, View, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { NativeWindStyleSheet } from 'nativewind'
 import CustomButton from '../components/CustomButton'
-
 import { useGlobalContext } from '../context/GlobalProvider'
 import { images } from "../constants"
+
+NativeWindStyleSheet.setOutput({
+    default: "native",
+})
 
 export default function App() {
 
