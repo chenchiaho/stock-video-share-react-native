@@ -1,17 +1,14 @@
 import { useState } from "react"
 import { Link, router } from "expo-router"
 import { SafeAreaView } from "react-native-safe-area-context"
-import { View, Text, ScrollView, Image, Alert } from "react-native"
+import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native"
 
 import { images } from "../../constants"
-import CustomButton from "../../components/CustomButton"
-import FormField from "../../components/FormField"
+import { CustomButton, FormField } from "../../components"
 import { getCurrentUser, signIn } from "../../lib/appwrite"
 import { useGlobalContext } from "../../context/GlobalProvider"
 
-
 const SignIn = () => {
-
     const { setUser, setIsLogged } = useGlobalContext()
     const [isSubmitting, setSubmitting] = useState(false)
     const [form, setForm] = useState({
@@ -46,15 +43,17 @@ const SignIn = () => {
             <ScrollView>
                 <View
                     className="flex justify-center w-full h-full px-4 my-6"
-
+                    style={{
+                        minHeight: Dimensions.get("window").height - 100,
+                    }}
                 >
                     <Image
                         source={images.logo}
                         resizeMode="contain"
-                        className="w-[95px] h-[26px]"
+                        className="w-[115px] h-[34px]"
                     />
 
-                    <Text className="mt-10 text-lg font-semibold text-white font-psemibold">
+                    <Text className="mt-10 text-2xl font-semibold text-white font-psemibold">
                         Log in to Aora
                     </Text>
 
@@ -62,7 +61,7 @@ const SignIn = () => {
                         title="Email"
                         value={form.email}
                         handleChangeText={(e) => setForm({ ...form, email: e })}
-                        otherStyles="mt-5"
+                        otherStyles="mt-7"
                         keyboardType="email-address"
                     />
 
@@ -70,13 +69,13 @@ const SignIn = () => {
                         title="Password"
                         value={form.password}
                         handleChangeText={(e) => setForm({ ...form, password: e })}
-                        otherStyles="mt-5"
+                        otherStyles="mt-7"
                     />
 
                     <CustomButton
                         title="Sign In"
                         handlePress={submit}
-                        containerStyles="mt-7 h-12"
+                        containerStyles="mt-7"
                         isLoading={isSubmitting}
                     />
 
@@ -88,7 +87,7 @@ const SignIn = () => {
                             href="/sign-up"
                             className="text-lg font-psemibold text-secondary"
                         >
-                            Sign Up
+                            Signup
                         </Link>
                     </View>
                 </View>

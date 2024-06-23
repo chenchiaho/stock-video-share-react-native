@@ -1,29 +1,25 @@
-import { FlatList, Text, View, Image, RefreshControl, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { FlatList, Text, View, Image, RefreshControl } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from "../../constants"
 import SearchInput from '../../components/SearchInput'
 import Trending from '../../components/Trending'
 import VideoCard from '../../components/VideoCard'
-import { getAllPosts } from '../../lib/appwrite'
+import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import EmptyState from '../../components/EmptyState'
 
 
-
-
-const home = () => {
+const Home = () => {
 
   const { data: posts, refetch } = useAppwrite(getAllPosts)
+  const { data: latestPosts } = useAppwrite(getLatestPosts)
+
   const [refreshing, setRefreshing] = useState(false)
 
-
   const onRefresh = async () => {
-
     setRefreshing(true)
-
     await refetch()
-
     setRefreshing(false)
   }
 
@@ -33,7 +29,13 @@ const home = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard video={item} />
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
         )}
         ListHeaderComponent={() => (
           <View className="flex px-4 my-6 space-y-6">
@@ -43,7 +45,7 @@ const home = () => {
                   Welcome Back
                 </Text>
                 <Text className="text-2xl text-white font-psemibold">
-                  UserName
+                  JSMastery
                 </Text>
               </View>
 
@@ -55,30 +57,30 @@ const home = () => {
                 />
               </View>
             </View>
+
             <SearchInput />
-            <View>
-              <Text className='text-white'>
+
+            <View className="flex-1 w-full pt-5 pb-8">
+              <Text className="mb-3 text-lg text-gray-100 font-pregular">
                 Latest Videos
               </Text>
 
-              <Trending post={[]} />
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}
-        ListEmptyComponent={() => {
+        ListEmptyComponent={() => (
           <EmptyState
             title="No Videos Found"
             subtitle="No videos created yet"
           />
-        }}
+        )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-
       />
     </SafeAreaView>
   )
 }
 
-export default home
-
+export default Home
