@@ -1,4 +1,4 @@
-# Video Sharing App (In Progress)
+# Video Sharing App
 
 
   <div>
